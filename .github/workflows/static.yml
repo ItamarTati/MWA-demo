@@ -23,12 +23,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Navigate to dist directory
-        run: cd dist
+      - name: Build static content
+        run: |
+          # Perform any build steps for your static content, e.g., npm run build
+          # Replace this with your actual build command
+          npm run build
+      - name: Archive static content
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          # Specify the index file to use
-          target-folder: "."  # Assuming you want to deploy everything inside the 'dist' directory
-          # Other deployment configurations...
